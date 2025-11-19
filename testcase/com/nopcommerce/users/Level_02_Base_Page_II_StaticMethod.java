@@ -1,10 +1,7 @@
 package com.nopcommerce.users;
 
-import commons.BasePage;
 import commons.BasePage3;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -14,7 +11,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.Random;
 
-public class Level_02_Base_Page_Init {
+public class Level_02_Base_Page_II_StaticMethod {
     private WebDriver driver;
 
     BasePage3 basePage;
@@ -23,10 +20,11 @@ public class Level_02_Base_Page_Init {
 
     @BeforeClass
     public void beforeClass() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        basePage = BasePage3.getBasePage3();
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        basePage = new BasePage3();
+
 
         firstName = "Thomas";
         LastName = "A";
@@ -76,8 +74,8 @@ public class Level_02_Base_Page_Init {
         basePage.waitForElementClickable(driver,"//button[@class='login-button']");
         basePage.clickToELement(driver,"//a[@class='ico-logout']");
 
-        basePage.waitForElementClickable(driver,"//button[@class='login-button']");
-        basePage.clickToELement(driver,"//button[@class='login-button']");
+        basePage.waitForElementClickable(driver,"//button[contains(@class,'login-button')]");
+        basePage.clickToELement(driver,"//button[contains(@class,'login-button')]");
 
 
         Assert.assertTrue(basePage.isElementDisplayed(driver,"//a[@class='ico-account']"));
