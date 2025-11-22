@@ -6,6 +6,10 @@ import pageUIs.LoginPageUI;
 
 public class LoginPageObject extends BasePage3 {
     private WebDriver driver;
+    public LoginPageObject(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public void enterToEmailTextbox(String emailAddress) {
         waitForElementVisible(driver, LoginPageUI.EMAIL_TEXTBOX);
         sendKeyToElement(driver,LoginPageUI.EMAIL_TEXTBOX, emailAddress);

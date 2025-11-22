@@ -6,6 +6,10 @@ import pageUIs.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage3 {
     private WebDriver driver;
+
+    public RegisterPageObject(WebDriver driver) {
+        this.driver = driver;
+    }
     public void clickToMaleRadio() {
         waitForElementClickable(driver, RegisterPageUI.GENDER_MALE_RADIO);
         checkToCheckboxRadio(driver,RegisterPageUI.GENDER_MALE_RADIO);
