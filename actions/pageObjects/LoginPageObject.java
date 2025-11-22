@@ -1,5 +1,23 @@
 package pageObjects;
 
-public class LoginPageObject {
-    
+import commons.BasePage3;
+import org.openqa.selenium.WebDriver;
+import pageUIs.LoginPageUI;
+
+public class LoginPageObject extends BasePage3 {
+    private WebDriver driver;
+    public void enterToEmailTextbox(String emailAddress) {
+        waitForElementVisible(driver, LoginPageUI.EMAIL_TEXTBOX);
+        sendKeyToElement(driver,LoginPageUI.EMAIL_TEXTBOX, emailAddress);
+    }
+
+    public void enterToPasswordTextbox(String password) {
+        waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
+        sendKeyToElement(driver,LoginPageUI.PASSWORD_TEXTBOX, password);
+    }
+
+    public void clickToLoginButton() {
+        waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
+        clickToELement(driver, LoginPageUI.LOGIN_BUTTON);
+    }
 }
