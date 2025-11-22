@@ -15,6 +15,12 @@ import java.util.Set;
 
 public class BasePage3 {
 
+    // Tuân theo nguyên tắc của tính đóng gói (Encapsulation)
+    // Có thể truy cập trực tiếp mà kh cần khởi tạo từ phạm vi class
+    public static BasePage3 getBasePage3(){
+        return new BasePage3();
+    }
+
     public void openPageUrl(WebDriver driver, String url){
         driver.get(url);
 
@@ -225,8 +231,16 @@ public class BasePage3 {
         new Actions(driver).moveToElement(getElement(driver, locator)).perform();
     }
 
+    public void clickToElementByAction(WebDriver driver, String locator){
+        new Actions(driver).click(getElement(driver,locator)).perform();
+    }
+
     public void clickAndHoldToELement(WebDriver driver, String locator){
         new Actions(driver).clickAndHold(getElement(driver, locator)).perform();
+    }
+
+    public void releaseLeftMouse(WebDriver driver){
+        new Actions(driver).release();
     }
 
     public void doubleClickToELement(WebDriver driver, String locator){
@@ -296,8 +310,6 @@ public class BasePage3 {
         return (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].validationMessage;", getElement(driver, locator));
     }
 
-
-
     public boolean isImageLoaded(WebDriver driver, String locator) {
         return (boolean) ((JavascriptExecutor) driver).executeScript("return arguments[0].complete " +
                         "&& typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0",
@@ -313,6 +325,11 @@ public class BasePage3 {
                 .until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
     }
 
+    public void waitForElementSelected(WebDriver driver, String locator){
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.elementToBeSelected(getByXpath(locator)));
+    }
+
     public void waitForElementPresence(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(ExpectedConditions.presenceOfElementLocated(getByXpath(locator)));
@@ -320,12 +337,12 @@ public class BasePage3 {
 
     public void waitForElementInvisible(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("")));
+                .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
     }
 
     public void waitForElementClickable(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("")));
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
     }
     public Alert waitAlertPresence (WebDriver driver){
 
